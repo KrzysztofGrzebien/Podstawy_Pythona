@@ -1,3 +1,4 @@
+# CW- 6.2
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -115,14 +116,11 @@ print(Q)
 v = np.arange(1,7)
 print( np.delete(v, 3, 0) )
 
-############################################################################
-
+#usuwa elementy macierzy pojedynczo, lub jako wektor
 np.size(v)
 np.shape(v)
-np.size(V)
-np.shape(V)
-         #########################################################################
 
+#Wymiary macierzy
 
 A = np.array([[1, 0, 0],
 [2, 3, -1],
@@ -135,7 +133,7 @@ print( A-B )
 print( A+2 )
 print( 2*A )
 
-#############################################################
+#Dodawanie, odejmowanie, oraz mnożenie przez skalar macierzy.
 
 
 MM1 = A@B
@@ -143,20 +141,20 @@ print(MM1)
 MM2 = B@A
 print(MM2)
 
-###########################################################
+#Mnożenie macierzowe
 
 MT1 = A*B
 print(MT1)
 MT2 = B*A
 print(MT2)
 
-##############################################################
+#Mnożenie tablicowe
 
 DT1 = A/B
 7
 print(DT1)
 
-####################################################
+#Dzielenie tablicowe, Rozwiązywanie układów równań liniowych
 
 C = np.linalg.solve(A,MM1)
 print(C) # porownaj z macierza B
@@ -165,19 +163,19 @@ b = A@x
 y = np.linalg.solve(A,b)
 print(y)
 
-#######################################################
+#Potęgowanie macierzy
 
 PM = np.linalg.matrix_power(A,2) # por. A@A
 PT = A**2 # por. A*A
 
-########################################################
+#Transpozycja
 
 A.T # transpozycja
 A.transpose()
 A.conj().T # hermitowskie sprzezenie macierzy (dla m. zespolonych)
 A.conj().transpose()
 
-###########################################################
+#Operatory porównania
 
 np.logical_not(A)
 np.logical_and(A, B)
@@ -189,7 +187,7 @@ print( v > 4 )
 print( np.logical_or(v>4, v<2))
 print( np.nonzero(v>4) )
 print( v[np.nonzero(v>4) ] )
-#################################################################
+#Maximum, minimum
 
 print(np.max(A))
 print(np.min(A))
@@ -198,7 +196,7 @@ print(np.max(A,1))
 print( A.flatten() )
 print( A.flatten('F') )
 
-################################################################
+#Utworzenie wykresu
 
 
 x = [1,2,3]
@@ -206,7 +204,7 @@ y = [4,6,5]
 plt.plot(x,y)
 plt.show()
 
-##############################################################
+#Wykres Sinusa z opisem i pogrubieniem
 
 
 
@@ -222,7 +220,7 @@ plt.grid(True)
 plt.show()
 
 
-################################################################
+#Wiele przebiegów na jednym wykresie
 
 
 x = np.arange(0.0, 2.0, 0.01)
@@ -235,7 +233,7 @@ plt.ylabel('Pozycja')
 plt.title('Wykres ')
 plt.grid(True)
 plt.show()
-##################################################################
+#Wiele przebiegów na jednym wykresie, inna legenda
 
 x = np.arange(0.0, 2.0, 0.01)
 y1 = np.sin(2.0*np.pi*x)
@@ -251,12 +249,8 @@ plt.grid(True)
 plt.show()
 
 
-##############################################################################################
-##############                      CWICZENIA                        #########################
-##############################################################################################
 
-
-# 6.3
+# CW- 6.3
 
 T1=np.arange(1,6)
 T2=np.arange(5,0,-1)
@@ -276,15 +270,51 @@ A=U5
 
 print(A)
 
-B=A[2]+A[4]
+# CW- 6.4
+
+B=np.array(A[2,:]+A[4,:])
 
 print(B)
 
+# CW- 6.5
 
+C=np.ones((1,np.size(A,1)))
 
+for i in range(0,np.size(A,1)):
+    C[0,i]=max(A[:,i])
 
+print(C)
 
+# CW- 6.6
 
+D=np.delete(B,[0,len(B)-1])
+print(D)
 
-print(T1)
-print(T2)
+# CW- 6.7
+
+for i in range(0,len(D)-1):
+    if D[i]==4:
+        D[i]=0
+
+print(D)
+
+# CW- 6.8
+
+C=max(C);# To jest specjalnie, żeby zamienić C z macierzy na wektor
+
+mac=max(C)
+mic=min(C)
+zakres=len(C)
+
+tmp=max(np.ones((1,len(C))))
+
+j=0
+
+for i in range(0,zakres):
+    print(C[i])
+    if (C[i]!=mic and C[i]!=mac):
+        tmp[j]=C[i]
+        j=j+1
+tmp=np.delete(tmp,[len(tmp)-2,len(tmp)-1])
+
+print(tmp)
