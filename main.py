@@ -2,7 +2,6 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
-
 arr = np.array([1, 2, 3, 4, 5])
 print(arr)
 
@@ -12,13 +11,13 @@ A=np.array([[1,2,3],[7,8,9]])
 print(A)
 
 #tworzy i  wyświetla A, czyli [1 2 3]
-#                   [7 8 9]
+#                             [7 8 9]
 
 A = np.array([[1, 2, 3],
               [7, 8, 9]])
 print(A)
 #tworzy i  wyświetla A, czyli [1 2 3]
-#                   [7 8 9]
+#                             [7 8 9]
 
 
 A=np.array([[1 , 2 , \
@@ -27,7 +26,6 @@ A=np.array([[1 , 2 , \
 print(A)
 
 #wyświetla A, ale \ pozwala na przeniesienie do następnej linii
-
 
 v = np.arange(1,7)
 print(v,"\n")
@@ -47,8 +45,6 @@ print(v,"\n")
 v = np.arange(1,2,0.1)
 print(v,"\n")
 # generuje wektor w zakresie 1 do 2 co 0.1
-
-
 
 v = np.linspace(1,3,4)
 print(v)
@@ -108,7 +104,6 @@ print( V[3] )
 
 #wyciąga wiwle elementów macierzy
 
-
 Q = np.delete(V, 2, 0)
 print(Q)
 Q = np.delete(V, 2, 1)
@@ -134,7 +129,6 @@ print( A+2 )
 print( 2*A )
 
 #Dodawanie, odejmowanie, oraz mnożenie przez skalar macierzy.
-
 
 MM1 = A@B
 print(MM1)
@@ -198,7 +192,6 @@ print( A.flatten('F') )
 
 #Utworzenie wykresu
 
-
 x = [1,2,3]
 y = [4,6,5]
 plt.plot(x,y)
@@ -206,12 +199,9 @@ plt.show()
 
 #Wykres Sinusa z opisem i pogrubieniem
 
-
-
 x = np.arange(0.0, 2.0, 0.01)
 y = np.sin(2.0*np.pi*x)
 plt.plot(x,y,'r:',linewidth=6)
-
 
 plt.xlabel('Czas')
 plt.ylabel('Pozycja')
@@ -219,9 +209,7 @@ plt.title('Nasz pierwszy wykres')
 plt.grid(True)
 plt.show()
 
-
 #Wiele przebiegów na jednym wykresie
-
 
 x = np.arange(0.0, 2.0, 0.01)
 y1 = np.sin(2.0*np.pi*x)
@@ -248,8 +236,6 @@ plt.title('Wykres ')
 plt.grid(True)
 plt.show()
 
-
-
 # CW- 6.3
 
 T1=np.arange(1,6)
@@ -258,7 +244,6 @@ T3=2*np.ones((2,3))
 T4=np.zeros((3,2))
 T5=np.linspace(-90,-70,3)
 T6=10*np.ones((5,1))
-
 
 U1 = np.block([[T1], [T2]])
 U2= np.block([[T3], [T5]])
@@ -270,11 +255,12 @@ A=U5
 
 print(A)
 
+
 # CW- 6.4
 
 B=np.array(A[2,:]+A[4,:])
-
 print(B)
+
 
 # CW- 6.5
 
@@ -282,32 +268,31 @@ C=np.ones((1,np.size(A,1)))
 
 for i in range(0,np.size(A,1)):
     C[0,i]=max(A[:,i])
-
 print(C)
+
 
 # CW- 6.6
 
 D=np.delete(B,[0,len(B)-1])
 print(D)
 
+
 # CW- 6.7
 
 for i in range(0,len(D)-1):
     if D[i]==4:
         D[i]=0
-
 print(D)
+
 
 # CW- 6.8
 
 C=max(C);# To jest specjalnie, żeby zamienić C z macierzy na wektor
-
+print(C)
 mac=max(C)
 mic=min(C)
 zakres=len(C)
-
 tmp=max(np.ones((1,len(C))))
-
 j=0
 
 for i in range(0,zakres):
@@ -316,5 +301,141 @@ for i in range(0,zakres):
         tmp[j]=C[i]
         j=j+1
 tmp=np.delete(tmp,[len(tmp)-2,len(tmp)-1])
+E=np.array(tmp)
+print(E)
+print(A)
 
-print(tmp)
+
+#CW - 6.9
+
+for i in range (0,np.size(A,0) ):
+    tmp=A[i,:]
+    if max(tmp)==np.amax(A):
+        print(tmp)
+
+for i in range (0,np.size(A,0) ):
+    tmp=A[i,:]
+    if min(tmp)==np.amin(A):
+        print(tmp)
+
+
+#CW - 6.10
+print(D*E)
+print(E*D)
+print(D@E)
+print(E@D)
+
+#CW - 6.11
+def rand_sq(n):
+    mat=np.random.randint(11,size=(n,n))
+    print(mat)
+    slad=np.trace(mat)
+    print(slad)
+    return mat,slad
+ceb,sl=rand_sq(6)
+
+
+#CW - 6.12
+
+def zerowanie(tab):
+    sy=np.size(tab,0)
+    sx=np.size(tab,1)
+    for i in range(0,sy):
+        for j in range(0,sx):
+            if i==j or i+j==sy-1:
+                tab[i,j]=0
+    print(tab)
+zerowanie(ceb)
+
+
+#CW - 6.13
+
+def sumowanie(mat):
+    suma=0
+    sy=np.size(mat,0)
+    sx=np.size(mat,1)
+    for i in range(0,sy):
+        for j in range(0,sx):
+            if i%2==0:
+                suma=suma+mat[i,j]
+    print(suma)
+
+print(ceb)
+sumowanie(ceb)
+
+
+#CW - 6.14
+
+fun_cos=lambda x:np.cos(2*x)
+x=np.arange(-10,10,0.1)
+y=fun_cos(x)
+plt.plot(x,y,color='red',linestyle='dashed')
+plt.show()
+print(fun_cos(np.pi/4))
+
+
+#CW - 6.15
+
+
+#CW - 6.16
+
+fun_sin_sqrt=lambda z:np.where(z<0,np.sin(z),np.sqrt(z))
+y2=fun_sin_sqrt(x)
+plt.plot(x,y,color='red',linestyle='dashed')
+plt.plot(x,y2,'g+')
+plt.show()
+
+
+#CW - 6.17
+
+fun_3=lambda x:3*fun_cos(x)+fun_sin_sqrt(x)
+y3=fun_3(x)
+plt.plot(x,y,color='red',linestyle='dashed')
+plt.plot(x,y2,'g+')
+plt.plot(x,y3,'b*')
+plt.show()
+
+
+#CW - 6.18
+
+a=np.array([[10, 5, 1, 7],[10, 9, 5, 5],[1, 6, 7, 3],[10, 0, 1, 5]])
+b=np.array([34, 44, 25, 27])
+xx=np.linalg.solve(a,b)
+print(xx)
+
+
+#CW - 6.19
+
+x=np.linspace(0,2*np.pi,1000000)
+fun_4=lambda x:np.sin(x)
+y_4=fun_4(x)
+int_fun=np.trapz(y_4)
+plt.plot(x,y_4,color='green',linestyle='dotted')
+plt.show()
+print(int_fun)
+
+
+#CW - 6.20
+
+A=np.array([[2.0, 1.0, -1.0],[1.0, -1.0, 1.0],[-3.0, 2.0, 0.0]])
+B=np.array([[2.0],[-5.0],[17.0]])
+U=np.block([A,B])
+sy=np.size(U,0)
+sx=np.size(U,1)
+print(U)
+print(sy)
+print(sx)
+
+for i in range(0,sy):
+    U[i,:]=U[i,:]/U[i,i]
+
+    for j in range(0,sy):
+        print(U)
+
+        if j!=i:
+            U[j, :] = U[j, :] - U[i, :] * (U[j, i] / U[i, i])
+print(U)
+
+
+
+
